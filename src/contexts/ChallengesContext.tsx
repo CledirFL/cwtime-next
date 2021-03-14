@@ -17,6 +17,7 @@ interface ChallengeContextData {
     activeChallenge: ChallengeProps;
     levelUp: () => void;
     startNewChallenge: () => void;
+    resetChallenge: () => void;
 }
 
 export const ChallengesContext = createContext({} as ChallengeContextData)
@@ -40,6 +41,10 @@ export function ChallengesProvider({ children }: ChallengeProviderProps) {
         setActiveChallenge(challenge);
     }
 
+    function resetChallenge() {
+        setActiveChallenge(null);
+    }
+
     return (
         <ChallengesContext.Provider
             value={{
@@ -48,7 +53,8 @@ export function ChallengesProvider({ children }: ChallengeProviderProps) {
                 challengesCompleted,
                 levelUp,
                 startNewChallenge,
-                activeChallenge
+                activeChallenge,
+                resetChallenge
             }}
         >
             {children}
