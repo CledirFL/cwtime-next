@@ -3,7 +3,10 @@ import Cookies from 'js-cookie'
 import challenges from "../../challenge.json";
 
 interface ChallengeProviderProps {
-    children: ReactNode
+    children: ReactNode;
+    level: number;
+    currentExperience: number;
+    challengesCompleted: number;
 }
 
 interface ChallengeProps {
@@ -25,10 +28,10 @@ interface ChallengeContextData {
 
 export const ChallengesContext = createContext({} as ChallengeContextData)
 
-export function ChallengesProvider({ children }: ChallengeProviderProps) {
-    const [level, setLevel] = useState(1);
-    const [currentExperience, setCurrentExperience] = useState(0);
-    const [challengesCompleted, setChallengesCompleted] = useState(0);
+export function ChallengesProvider({ children, ...res }: ChallengeProviderProps) {
+    const [level, setLevel] = useState(res.level ?? 1);
+    const [currentExperience, setCurrentExperience] = useState(res.currentExperience ?? 0);
+    const [challengesCompleted, setChallengesCompleted] = useState(res.challengesCompleted ?? 0);
 
     const [activeChallenge, setActiveChallenge] = useState(null);
 
