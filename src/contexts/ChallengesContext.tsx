@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 import challenges from "../../challenge.json";
 
 interface ChallengeProviderProps {
@@ -38,6 +39,12 @@ export function ChallengesProvider({ children }: ChallengeProviderProps) {
         Notification.requestPermission();
     }, [])
 
+    useEffect(() => {
+        Cookies.set('level', String(level));
+        Cookies.set('currentExperience', String(currentExperience));
+        Cookies.set('challengesCompleted', String(challengesCompleted));
+    }, [level, currentExperience, challengesCompleted])
+
     function levelUp() {
         setLevel(level + 1);
     }
@@ -48,7 +55,6 @@ export function ChallengesProvider({ children }: ChallengeProviderProps) {
 
         setActiveChallenge(challenge);
 
-       
         if(Notification.permission === 'granted') {
             new Audio('/notification.mp3').play();
             new Notification('Novo desafio 🎉', {
