@@ -1,0 +1,1 @@
+Developed a worktime management project inspired by the Pomodoro technique, incorporating random exercise suggestions after each interval to boost productivity, maintain focus, and promote physical well-being.
